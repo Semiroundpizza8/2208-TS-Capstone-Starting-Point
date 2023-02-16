@@ -1,46 +1,93 @@
 import React, { useEffect } from "react";
-import Home from "./Home";
-import Login from "./Login";
-import { setUser } from "../store/userSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { RootState } from "../store";
 
 const App = () => {
-  const { user } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-
-  const loginWithToken = async () => {
-    const token = window.localStorage.getItem("token");
-    if (token) {
-      const response = await axios.get("/api/auth", {
-        headers: {
-          authorization: token,
-        },
-      });
-
-      dispatch(setUser(response.data));
-    }
-  };
-
-  useEffect(() => {
-    loginWithToken();
-  }, []);
-
-  if (!user.id) return <Login />;
   return (
-    <div>
-      <h1>Hi, My name is totally Ben!!!!</h1>
-      <h1>My Name is Louis!!</h1>
-      <div>
-        <nav>
-          <Link to="/">Hooooooooome</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateAreas: `
+            'red    blue  orange'
+            'green  blue  purple'
+            'footer footer footer'
+        `,
+        gridTemplateColumns: "100px 1fr 100px",
+        gridTemplateRows: "30fr 70fr 100px",
+        gap: "20px",
+
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <div
+        style={{
+          background: "red",
+          gridArea: "red",
+        }}
+      >
+        <h1>Hi</h1>
       </div>
+      <div
+        style={{
+          background: "blue",
+          gridArea: "blue",
+
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "50%",
+            height: "50%",
+            background: "yellow",
+          }}
+        >
+          <h1>Middle</h1>
+        </div>
+        <div
+          style={{
+            width: "50%",
+            height: "50%",
+            background: "yellow",
+          }}
+        >
+          <h1>Middle</h1>
+        </div>
+        <div
+          style={{
+            width: "50%",
+            height: "50%",
+            background: "yellow",
+          }}
+        >
+          <h1>Middle</h1>
+        </div>
+      </div>
+      <div
+        style={{
+          background: "green",
+          gridArea: "green",
+        }}
+      ></div>
+      <div
+        style={{
+          background: "orange",
+          gridArea: "orange",
+        }}
+      ></div>
+      <div
+        style={{
+          background: "purple",
+          gridArea: "purple",
+        }}
+      ></div>
+      <div
+        style={{
+          background: "pink",
+          gridArea: "footer",
+        }}
+      ></div>
     </div>
   );
 };
